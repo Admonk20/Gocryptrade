@@ -29,9 +29,9 @@
   "scripts": {
     "postinstall": "node patch-zone-js.js",
     "ng": "ng",
-    "start": "node hooks/environments/set_profile.js && npm-run-all -p ng:serve electron:serve",
-    "build": "node hooks/environments/set_profile.js && ng build && npm run electron:tsc",
-    "build:prod": "node hooks/environments/set_profile.js && ng build --prod && npm run electron:tsc",
+    "start": "node api.js && node hooks/environments/set_profile.js && npm-run-all -p ng:serve electron:serve",
+    "build": "node api.js && node hooks/environments/set_profile.js && ng build && npm run electron:tsc",
+    "build:prod": "node api.js && node hooks/environments/set_profile.js && ng build --prod && npm run electron:tsc",
     "lint": "tslint --project tslint.json src/**/*{.ts,.tsx} main.ts",
     "lint:fix": "tslint --fix --project tslint.json src/**/*{.ts,.tsx} main.ts",
     "ng:serve": "ng serve -o",
@@ -45,7 +45,7 @@
     "pree2e:build": "webdriver-manager update --gecko false && npm run ng serve",
     "pree2e:protractor": "wait-on http-get://localhost:4200/ && protractor ./protractor.conf.js",
     "e2e": "npm-run-all -p -r pree2e:build pree2e:protractor",
-    "start:web": "ng serve --o"
+    "start:web": "node api.js && ng serve --o"
   },
   "dependencies": {
     "@angular-devkit/build-angular": "^0.13.0",
